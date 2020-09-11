@@ -6,7 +6,9 @@ import { useStateValue } from "./StateProvider";
 import FlipMove from "react-flip-move";
 
 function Checkout() {
-  const [{ basket }] = useStateValue();
+  const [{ user, basket }] = useStateValue();
+
+  console.log(user);
   return (
     <div className="checkout">
       <div className="checkout__left">
@@ -25,11 +27,7 @@ function Checkout() {
         ) : (
           <div>
             <h2 className="checkout__title">Your shopping basket.</h2>
-            <FlipMove
-              duration={500}
-              delay={200}
-              enterAnimation="accordionVertical"
-            >
+            <FlipMove duration={500}>
               {basket.map((item) => (
                 <CheckoutProductWrapper
                   key={item.id}
@@ -38,6 +36,7 @@ function Checkout() {
                   price={item.price}
                   rating={item.rating}
                   image={item.image}
+                  hidden={false}
                 />
               ))}
             </FlipMove>
